@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/css/user_profile.css">
+
+<div class="profile-card">
+    <h1>
+        Mobigic | Profile Page
+    </h1>
+
+    <div class="user-details">
+        <p><strong>Name:</strong> <%= profile_user.name %></p>
+        <p><strong>Email:</strong> <%= profile_user.email %></p>
+    </div>
+
+    <div class="upload-section">
+        <p>To Upload File</p>
+        <form action="/users/upload/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
+            <input type="file" name="file" placeholder="Profile Picture">
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+
+    <div class="uploaded-files">
+        <p>Uploaded Files</p>
+        <small>Enter 6-digit code to download</small>
+        <ul>
+            <% for (const file of profile_user.file) { %>
+                <li>
+                    <form action="/users/download/<%= file.fileId %>" method="post">
+                        <h3><%= file.fileName %></h3>
+                        <input type="hidden" name="fileId" value="<%= file.fileId %>">
+                        <input type="text" name="code" placeholder="Enter 6-digit code" required>
+                        <button type="submit">Download</button>
+                        <a href="/users/delete/<%= file.fileId %>">Delete</a>
+                    </form>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+</div>
