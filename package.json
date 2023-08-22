@@ -4,7 +4,8 @@
   "description": "Application where user can upload files and remove them",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Piyush Jadhav",
