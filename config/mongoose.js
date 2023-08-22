@@ -4,7 +4,7 @@
 const mongoose = require("mongoose");
 
 // Connect to MongoDB using the provided URI
-mongoose.connect("mongodb://127.0.0.1/mobigic");
+mongoose.connect(process.env.MONGO_URL);
 
 // Get a reference to the database connection
 const db = mongoose.connection;
