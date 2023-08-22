@@ -2,6 +2,10 @@
 
 const express = require('express');
 const path = require('path');
+const dotenv = require('dotenv');
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Initialize Express app
 const app = express()
@@ -40,14 +44,14 @@ app.set("views", path.join(__dirname, './views'));
 app.use(
   session({
     name: "Mobigic", // Name of the session cookie
-    secret: "something", // Secret key for encrypting the session
+    secret: process.env.SESSION_SECRET, // Secret key for encrypting the session
     saveUninitialized: false,
     resave: false,
     cookie: {
       maxAge: 1000 * 60 * 100, // Session duration in milliseconds
     },
     store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1/mobigic", // Replace this with your MongoDB connection string
+      mongoUrl: process.env.MONGO_URL, // Replace this with your MongoDB connection string
       autoRemove: "disabled", // Option to disable automatic session removal
     }),
   })
